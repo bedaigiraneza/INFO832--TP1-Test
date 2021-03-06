@@ -15,7 +15,7 @@ public class Cave {
 	public Cave(){
 		this.rayons = new Vector<Boisson>();
 	}
-		
+	
 	/**
 	 * @param b
 	 */

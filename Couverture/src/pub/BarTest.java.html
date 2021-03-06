@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>BarTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (6 mars 2021 21:33:01)</a> &gt; <a href="../../index.html" class="el_group">Pub</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">pub</a> &gt; <span class="el_source">BarTest.java</span></div><h1>BarTest.java</h1><pre class="source lang-java linenums">package pub;
+import junit.framework.TestCase;
+
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Enumeration;
+import java.util.Vector;
+
+import org.junit.Test;
+
+<span class="fc" id="L12">public class BarTest extends TestCase {</span>
+<span class="fc" id="L13">	private Bar bar = new Bar();</span>
+<span class="fc" id="L14">	private Boisson cafe = new Boisson(&quot;Café&quot;);</span>
+<span class="fc" id="L15">	private Boisson soda = new Boisson(&quot;Soda&quot;);</span>
+<span class="fc" id="L16">	private Boisson grenadine = new Boisson(&quot;Grenadine&quot;);</span>
+<span class="fc" id="L17">	private Boisson gin = new Boisson(&quot;Gin&quot;, new Float(30));</span>
+
+<span class="fc" id="L19">	private Cocktail sansAlcool = new Cocktail(&quot;cocktailSansAlcool&quot;);</span>
+<span class="fc" id="L20">	private Cocktail avecAlcool = new Cocktail(&quot;cocktailAvecAlcool&quot;);</span>
+<span class="fc" id="L21">	private Cocktail avecAlcool2 = new Cocktail(&quot;cocktailAvecAlcool2&quot;);</span>
+
+	@Test
+	public void testAddBoissonChaude() {
+		// Boisson chaude
+<span class="fc" id="L26">		bar.add(cafe);</span>
+<span class="nc" id="L27">		assertTrue(bar.boissonChaude.contains(cafe));</span>
+<span class="nc" id="L28">	}</span>
+	
+	public void testAddBoissonFroide() {
+		// Boisson froide
+<span class="fc" id="L32">		bar.add(soda);</span>
+<span class="fc" id="L33">		assertTrue(bar.boissonFroide.contains(soda));</span>
+		
+		// Deuxième boisson froide
+<span class="fc" id="L36">		bar.add(grenadine);</span>
+<span class="fc" id="L37">		assertTrue(bar.boissonFroide.contains(grenadine));</span>
+<span class="fc" id="L38">		assertTrue(bar.boissonFroide.contains(soda));</span>
+<span class="fc" id="L39">	}</span>
+	
+	public void testAddBoissonAlcoolisee() {
+		// Boisson alcoolisée
+<span class="fc" id="L43">		bar.add(gin);</span>
+<span class="fc" id="L44">		assertTrue(bar.boissonAlcoolisee.contains(gin));</span>
+<span class="fc" id="L45">	}</span>
+	
+	public void testAddCocktailSansAlcool() {
+		// Cocktail sans alcool
+<span class="fc" id="L49">		sansAlcool.add(&quot;grenadine&quot;, (double) 1);</span>
+<span class="fc" id="L50">		sansAlcool.add(&quot;soda&quot;, (double) 7);</span>
+<span class="fc" id="L51">		bar.add(sansAlcool);</span>
+<span class="nc" id="L52">		assertTrue(bar.cocktailSansAlcoole.contains(sansAlcool));</span>
+<span class="nc" id="L53">	}</span>
+	
+	public void testAddCocktailAvecAlcool() {
+		// Cocktail avec alcool
+<span class="fc" id="L57">		avecAlcool.add(&quot;gin&quot;, (double) 2);</span>
+<span class="fc" id="L58">		avecAlcool.add(&quot;whiskey&quot;, (double) 3);</span>
+<span class="fc" id="L59">		bar.add(avecAlcool);</span>
+<span class="fc" id="L60">		assertTrue(bar.cocktailAvecAlcoole.contains(avecAlcool));</span>
+		
+		// Deuxieme cocktail avec alcool
+<span class="fc" id="L63">		avecAlcool2.add(&quot;whiskey&quot;, (double) 20);</span>
+<span class="fc" id="L64">		avecAlcool2.add(&quot;coca&quot;, (double) 80);</span>
+<span class="fc" id="L65">		bar.add(avecAlcool2);</span>
+<span class="fc" id="L66">		assertTrue(bar.cocktailAvecAlcoole.contains(avecAlcool2));</span>
+<span class="fc" id="L67">		assertTrue(bar.cocktailAvecAlcoole.contains(avecAlcool));</span>
+<span class="fc" id="L68">	}</span>
+	
+	public void testServBoissonChaude() {
+		// Remplissage du bar
+<span class="fc" id="L72">		bar.add(cafe);</span>
+<span class="fc" id="L73">		bar.add(grenadine);</span>
+<span class="fc" id="L74">		bar.add(gin);</span>
+		
+<span class="fc" id="L76">		sansAlcool.add(&quot;grenadine&quot;, (double) 1);</span>
+<span class="fc" id="L77">		sansAlcool.add(&quot;soda&quot;, (double) 7);</span>
+<span class="fc" id="L78">		bar.add(sansAlcool);</span>
+		
+<span class="fc" id="L80">		avecAlcool.add(&quot;gin&quot;, (double) 2);</span>
+<span class="fc" id="L81">		avecAlcool.add(&quot;whiskey&quot;, (double) 3);</span>
+<span class="fc" id="L82">		bar.add(avecAlcool);</span>
+		
+		// Commande café
+<span class="nc" id="L85">		assertTrue(bar.boissonChaude.contains(cafe));</span>
+<span class="nc" id="L86">		assertSame(bar.serv(&quot;Cafe&quot;),cafe);</span>
+<span class="nc" id="L87">		assertFalse(bar.boissonChaude.contains(cafe));</span>
+<span class="nc" id="L88">	}</span>
+	
+	public void testServBoissonFroide() {
+		// Remplissage du bar
+<span class="fc" id="L92">		bar.add(cafe);</span>
+<span class="fc" id="L93">		bar.add(grenadine);</span>
+<span class="fc" id="L94">		bar.add(gin);</span>
+		
+<span class="fc" id="L96">		sansAlcool.add(&quot;grenadine&quot;, (double) 1);</span>
+<span class="fc" id="L97">		sansAlcool.add(&quot;soda&quot;, (double) 7);</span>
+<span class="fc" id="L98">		bar.add(sansAlcool);</span>
+		
+<span class="fc" id="L100">		avecAlcool.add(&quot;gin&quot;, (double) 2);</span>
+<span class="fc" id="L101">		avecAlcool.add(&quot;whiskey&quot;, (double) 3);</span>
+<span class="fc" id="L102">		bar.add(avecAlcool);</span>
+		
+		// Commande grenadine
+<span class="fc" id="L105">		assertTrue(bar.boissonFroide.contains(grenadine));</span>
+<span class="fc" id="L106">		assertSame(bar.serv(&quot;Grenadine&quot;),grenadine);</span>
+<span class="fc" id="L107">		assertFalse(bar.boissonFroide.contains(grenadine));</span>
+<span class="fc" id="L108">	}</span>
+	
+	public void testServSansAlcool() {
+		// Remplissage du bar
+<span class="fc" id="L112">		bar.add(cafe);</span>
+<span class="fc" id="L113">		bar.add(grenadine);</span>
+<span class="fc" id="L114">		bar.add(gin);</span>
+		
+<span class="fc" id="L116">		sansAlcool.add(&quot;grenadine&quot;, (double) 1);</span>
+<span class="fc" id="L117">		sansAlcool.add(&quot;soda&quot;, (double) 7);</span>
+<span class="fc" id="L118">		bar.add(sansAlcool);</span>
+		
+<span class="fc" id="L120">		avecAlcool.add(&quot;gin&quot;, (double) 2);</span>
+<span class="fc" id="L121">		avecAlcool.add(&quot;whiskey&quot;, (double) 3);</span>
+<span class="fc" id="L122">		bar.add(avecAlcool);</span>
+		
+		// Commande boisson sans alcool
+<span class="nc" id="L125">		assertTrue(bar.cocktailSansAlcoole.contains(sansAlcool));</span>
+<span class="nc" id="L126">		assertSame(bar.serv(&quot;cocktailSansAlcool&quot;),sansAlcool);</span>
+<span class="nc" id="L127">		assertFalse(bar.boissonFroide.contains(sansAlcool));</span>
+<span class="nc" id="L128">	}</span>
+	
+	public void testServAvecAlcool() {
+		// Remplissage du bar
+<span class="fc" id="L132">		bar.add(cafe);</span>
+<span class="fc" id="L133">		bar.add(grenadine);</span>
+<span class="fc" id="L134">		bar.add(gin);</span>
+		
+<span class="fc" id="L136">		sansAlcool.add(&quot;grenadine&quot;, (double) 1);</span>
+<span class="fc" id="L137">		sansAlcool.add(&quot;soda&quot;, (double) 7);</span>
+<span class="fc" id="L138">		bar.add(sansAlcool);</span>
+		
+<span class="fc" id="L140">		avecAlcool.add(&quot;gin&quot;, (double) 2);</span>
+<span class="fc" id="L141">		avecAlcool.add(&quot;whiskey&quot;, (double) 3);</span>
+<span class="fc" id="L142">		bar.add(avecAlcool);</span>
+		
+		// Commande boisson avec alcool
+<span class="fc" id="L145">		assertTrue(bar.cocktailAvecAlcoole.contains(avecAlcool));</span>
+<span class="nc" id="L146">		assertSame(bar.serv(&quot;cocktailAvecAlcool&quot;),avecAlcool); // Plante a cause de liste vide</span>
+<span class="nc" id="L147">		assertFalse(bar.boissonFroide.contains(avecAlcool));</span>
+<span class="nc" id="L148">	}</span>
+	
+	public void testToString() {
+<span class="fc" id="L151">		assertNotNull(bar.toString());</span>
+<span class="fc" id="L152">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Merged (6 mars 2021 21:33:01)</div></body></html>

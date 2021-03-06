@@ -9,7 +9,7 @@ import java.util.Enumeration;
  */
 public class Cocktail {
 	
-	private class Ingrediant{
+	public class Ingrediant{
 		public String ingrediant;
 		public Double quantite;
 		

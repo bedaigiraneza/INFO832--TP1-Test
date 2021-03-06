@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>BoissonTest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (6 mars 2021 21:33:01)</a> &gt; <a href="../../index.html" class="el_group">Pub</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">pub</a> &gt; <span class="el_source">BoissonTest.java</span></div><h1>BoissonTest.java</h1><pre class="source lang-java linenums">package pub;
+
+import junit.framework.TestCase;
+
+import org.junit.Test;
+
+<span class="fc" id="L7">public class BoissonTest extends TestCase {</span>
+<span class="fc" id="L8">	private Boisson soda = new Boisson(&quot;Soda&quot;);</span>
+<span class="fc" id="L9">	private Boisson gin = new Boisson(&quot;Gin&quot;, new Float(30));</span>
+<span class="fc" id="L10">	private Boisson pamplemousse = new Boisson(&quot;Pamplemousse&quot;, new Float(0));</span>
+
+	@Test
+	public void testNonAlcoolise() {
+<span class="fc" id="L14">		assertEquals(soda.nom, &quot;Soda&quot;);</span>
+<span class="fc" id="L15">		assertFalse(soda.alcoolise);</span>
+<span class="fc" id="L16">		assertNotNull(soda.toString());</span>
+<span class="fc" id="L17">	}</span>
+	
+	public void testAlcoolise() {
+<span class="fc" id="L20">		assertEquals(gin.nom, &quot;Gin&quot;);</span>
+<span class="fc" id="L21">		assertEquals(gin.degre,(float) 30);</span>
+<span class="fc" id="L22">		assertTrue(gin.alcoolise);</span>
+<span class="fc" id="L23">		assertNotNull(gin.toString());</span>
+<span class="fc" id="L24">	}</span>
+	
+	public void testZeroDegres() {
+		// On vérifie qu'une boisson à 0 degre n'est pas alcoolisée
+<span class="fc" id="L28">		assertEquals(pamplemousse.nom,&quot;Pamplemousse&quot;);</span>
+<span class="nc" id="L29">		assertFalse(pamplemousse.alcoolise); </span>
+<span class="nc" id="L30">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Merged (6 mars 2021 21:33:01)</div></body></html>

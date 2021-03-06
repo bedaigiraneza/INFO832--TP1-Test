@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Bar.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">Merged (6 mars 2021 21:33:01)</a> &gt; <a href="../../index.html" class="el_group">Pub</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.source.html" class="el_package">pub</a> &gt; <span class="el_source">Bar.java</span></div><h1>Bar.java</h1><pre class="source lang-java linenums">package pub;
+import java.util.Vector; 
+import java.util.Enumeration;
+
+/**
+ * @author Pierre Le Fameux
+ *
+ */
+public class Bar {
+	public Vector&lt;Boisson&gt; boissonChaude;
+	public Vector&lt;Boisson&gt; boissonFroide;
+	public Vector&lt;Boisson&gt; boissonAlcoolisee;
+	public Vector&lt;Cocktail&gt; cocktailSansAlcoole;
+	public Vector&lt;Cocktail&gt; cocktailAvecAlcoole;
+	
+	/**
+	 * 
+	 */
+<span class="fc" id="L19">	public Bar(){</span>
+<span class="fc" id="L20">		this.boissonChaude = new Vector&lt;Boisson&gt;();</span>
+<span class="fc" id="L21">		this.boissonFroide = new Vector&lt;Boisson&gt;();</span>
+<span class="fc" id="L22">		this.boissonAlcoolisee = new Vector&lt;Boisson&gt;();</span>
+		
+<span class="fc" id="L24">		this.cocktailAvecAlcoole = new Vector&lt;Cocktail&gt;();</span>
+<span class="fc" id="L25">		this.cocktailSansAlcoole = new Vector&lt;Cocktail&gt;();	</span>
+<span class="fc" id="L26">	}</span>
+	
+	/**
+	 * @param boisson
+	 */
+	public void add(Boisson boisson){
+<span class="fc bfc" id="L32" title="All 2 branches covered.">		if(boisson.alcoolise){</span>
+<span class="fc" id="L33">			this.boissonAlcoolisee.add(boisson);</span>
+<span class="fc" id="L34">		}else{</span>
+<span class="fc" id="L35">			this.boissonFroide.add(boisson);</span>
+		}
+<span class="fc" id="L37">	}</span>
+	
+	/**
+	 * @param cocktail
+	 */
+	public void add(Cocktail cocktail){
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">		if(cocktail.alcoolFree()){</span>
+<span class="nc" id="L44">			this.cocktailSansAlcoole.add(cocktail);</span>
+<span class="nc" id="L45">		}else{</span>
+<span class="fc" id="L46">			this.cocktailAvecAlcoole.add(cocktail);</span>
+		}
+<span class="fc" id="L48">	}</span>
+	
+	/**
+	 * @param command
+	 * @return
+	 */
+	public Object serv(String command){
+<span class="fc" id="L55">		Boisson retourB=null;</span>
+<span class="fc" id="L56">		Cocktail retourC=null;</span>
+		Enumeration e;
+		
+<span class="fc" id="L59">		e = this.boissonFroide.elements ();</span>
+<span class="fc bfc" id="L60" title="All 4 branches covered.">		while (e.hasMoreElements () &amp;&amp; !((retourB=(Boisson)e.nextElement()).nom.equalsIgnoreCase(command))){}</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">		if(retourB.nom.equalsIgnoreCase(command)){</span>
+<span class="fc" id="L62">			this.boissonFroide.remove(retourB);</span>
+<span class="fc" id="L63">			return retourB;</span>
+		}
+		
+<span class="fc" id="L66">		e = this.boissonAlcoolisee.elements ();</span>
+<span class="pc bpc" id="L67" title="1 of 4 branches missed.">		while (e.hasMoreElements () &amp;&amp; !((retourB=(Boisson)e.nextElement()).nom.equalsIgnoreCase(command))){}</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">		if(retourB.nom.equalsIgnoreCase(command)){</span>
+<span class="nc" id="L69">			this.boissonAlcoolisee.remove(retourB);</span>
+<span class="nc" id="L70">			return retourB;</span>
+		}
+		
+<span class="fc" id="L73">		e = this.boissonChaude.elements ();</span>
+<span class="pc bpc" id="L74" title="3 of 4 branches missed.">		while (e.hasMoreElements () &amp;&amp; !((retourB=(Boisson)e.nextElement()).nom.equalsIgnoreCase(command))){}</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">		if(retourB.nom.equalsIgnoreCase(command)){</span>
+<span class="nc" id="L76">			this.boissonChaude.remove(retourB);</span>
+<span class="nc" id="L77">			return retourB;</span>
+		}
+		
+<span class="fc" id="L80">		e = this.cocktailSansAlcoole.elements ();</span>
+<span class="pc bpc" id="L81" title="3 of 4 branches missed.">		while (e.hasMoreElements () &amp;&amp; !((retourC=(Cocktail)e.nextElement()).nom.equalsIgnoreCase(command))){}</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">		if(retourC.nom.equalsIgnoreCase(command)){</span>
+<span class="nc" id="L83">			this.cocktailSansAlcoole.remove(retourC);</span>
+<span class="nc" id="L84">			return retourC;</span>
+		}
+		
+<span class="nc" id="L87">		e = this.cocktailAvecAlcoole.elements ();</span>
+<span class="nc bnc" id="L88" title="All 4 branches missed.">		while (e.hasMoreElements () &amp;&amp; !((retourC=(Cocktail)e.nextElement()).nom.equalsIgnoreCase(command))){}</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">		if(retourC.nom.equalsIgnoreCase(command)){</span>
+<span class="nc" id="L90">			this.cocktailAvecAlcoole.remove(retourC);</span>
+<span class="nc" id="L91">			return retourC;</span>
+		}
+		
+<span class="nc" id="L94">		return null;</span>
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString(){
+<span class="fc" id="L101">		String retour = new String();</span>
+<span class="fc" id="L102">		String eol = System.getProperty(&quot;line.separator&quot;); </span>
+		Enumeration e;
+		
+<span class="fc" id="L105">		retour = retour + &quot;Bar : &quot; + eol;</span>
+		
+<span class="fc" id="L107">		retour = retour + &quot;\t Sans alcool&quot; + eol;</span>
+<span class="fc" id="L108">		e = this.boissonFroide.elements ();</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">		while (e.hasMoreElements ()) {</span>
+<span class="nc" id="L110">			retour = retour + &quot;\t\t&quot; + e.nextElement().toString() + eol;</span>
+		}
+		
+<span class="fc" id="L113">		retour = retour + &quot;\t Avec alcool&quot; + eol;</span>
+<span class="fc" id="L114">		e = this.boissonAlcoolisee.elements();</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">		while (e.hasMoreElements ()) {</span>
+<span class="nc" id="L116">			retour = retour + &quot;\t\t&quot; + e.nextElement().toString() + eol;</span>
+		}
+		
+<span class="fc" id="L119">		retour = retour + &quot;\t Cocktail sans alcool&quot; + eol;</span>
+<span class="fc" id="L120">		e = this.cocktailSansAlcoole.elements();</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">		while (e.hasMoreElements ()) {</span>
+<span class="nc" id="L122">			retour = retour + &quot;\t\t&quot; + e.nextElement().toString() + eol;</span>
+		}
+		
+<span class="fc" id="L125">		retour = retour + &quot;\t Cocktail avec alcool&quot; + eol;</span>
+<span class="fc" id="L126">		e = this.cocktailAvecAlcoole.elements();</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">		while (e.hasMoreElements ()) {</span>
+<span class="nc" id="L128">			retour = retour + &quot;\t\t&quot; + e.nextElement().toString() + eol;</span>
+		}
+		
+<span class="fc" id="L131">		retour = retour + &quot;\t Boissons chaudes&quot; + eol;</span>
+<span class="fc" id="L132">		e = this.boissonChaude.elements();</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">		while (e.hasMoreElements ()) {</span>
+<span class="nc" id="L134">			retour = retour + &quot;\t\t&quot; + e.nextElement().toString() + eol;</span>
+		}
+		
+<span class="fc" id="L137">		return retour;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>Merged (6 mars 2021 21:33:01)</div></body></html>
